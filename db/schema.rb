@@ -17,14 +17,12 @@ ActiveRecord::Schema.define(version: 20151122204227) do
   enable_extension "plpgsql"
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                         null: false
-    t.string   "password_digest",                  null: false
-    t.string   "session_token",                    null: false
-    t.string   "provincial_title"
-    t.string   "national_title"
-    t.boolean  "admin",            default: false, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.string   "username",                        null: false
+    t.string   "password_digest",                 null: false
+    t.string   "session_token",                   null: false
+    t.boolean  "admin",           default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
