@@ -1,39 +1,22 @@
-# Phase 3: Notebooks and Tags (2 days)
+# Phase 3: Add Messages, Notifications, and national government (2 days)
 
 ## Rails
 ### Models
-* Notebook
-* Tag
-* Tagging
+* Message
+* Notification
+* GovernmentPosition
 
 ### Controllers
-* Api::NotebooksController (create, destroy, index, show, update)
+* MessagesController
+* NotificationsController
+* GovernmentPositionsController
 
 ### Views
-* notebooks/index.json.jbuilder
-* notebooks/show.json.jbuilder
-* tags/show.json.jbuilder
-
-## Flux
-### Views (React Components)
-* NotebooksIndex
-  - NotebookIndexItem
-* NotebookForm
-* SearchIndex
-
-### Stores
-* Notebook
-
-### Actions
-* ApiActions.receiveAllNotebooks
-* ApiActions.receiveSingleNotebook
-* ApiActions.deleteNotebook
-
-### ApiUtil
-* ApiUtil.fetchAllNotebooks
-* ApiUtil.fetchSingleNotebook
-* ApiUtil.createNotebook
-* ApiUtil.editNotebook
-* ApiUtil.destroyNotebook
+* messages/_message.html.erb
+* messages/_message_form.html.erb
+* notifications/_notification.html.erb
+* notifications/_notification_form.html.erb
+* government_positions/edit.html.erb
 
 ## Gems/Libraries
+* kaminari

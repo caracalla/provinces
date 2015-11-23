@@ -1,98 +1,79 @@
-# FresherNote
+# Provinces
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
-
-[heroku]: http://www.herokuapp.com
+Link coming soon!
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote built using Ruby on Rails
-and React.js. FresherNote allows users to:
+Build a province, create cities and become a power to be reckoned with.  Team up
+with your friends to create powerful nations with sophisticated governance and
+vie for global dominance through warfare and eminently affordable bonuses! :money_with_wings:
 
-<!-- This is a Markdown checklist. Use it to keep track of your progress! -->
-
-- [ ] Create an account
-- [ ] Log in / Log out
-- [ ] Create, read, edit, and delete notes
-- [ ] Organize notes within Notebooks
-- [ ] Tag notes with multiple tags and search notes by tag
-- [ ] Search through notes for blocks of text
-- [ ] Apply complex styling to notes while editing
-- [ ] Set reminders on notes
+- [x] Create an account
+- [x] Log in / Log out
+- [ ] Create, read, edit, and delete provinces and nations
+- [ ] Add avatars and flags
+- [ ] Add cities and additional game logic
+- [ ] Add messages and notifications
+- [ ] Nation governance
+- [ ] Add Store and Stripe
+- [ ] War
 
 ## Design Docs
-* [View Wireframes][view]
 * [DB schema][schema]
 
-[view]: ./docs/views.md
 [schema]: ./docs/schema.md
 
 ## Implementation Timeline
+Note: Time estimates are full days of work, not calendar days>
 
-### Phase 1: User Authentication, Note Model and JSON API (1.5 days)
+### Phase 1: User authentication, Province and Nation CRUD and MVC (2 days)
 
-In Phase 1, I will begin by implementing user signup and authentication (using
-BCrypt). There will be a basic landing page after signup that will contain the
-container for the application's root React component. Before building out the
-front end, I will begin by setting up a full JSON API for Notes.
+Basic user signup and signin, province and nation CRUD along with some basic
+views and attributes.
 
 [Details][phase-one]
 
-### Phase 2: Flux Architecture and Note CRUD (2.5 days)
+### Phase 2: Add Images, and Settlements, flesh out game logic (2 days)
 
-Phase 2 is focused on setting up Flux, the React Router, and the React view
-structure for the main application. After the basic Flux architecture has been
-set up, a Note store will be implemented and a set of actions corresponding to
-the needed CRUD functionality created. Once this is done, I will create React
-views for the Notes `Index`, `IndexItem` and `Form`. At the end of Phase 2,
-Notes can be created, read, edited and destroyed in the browser. Notes should
-save to the database when the form loses focus or is left idle after editing.
-Lastly, while constructing the views I will start using basic bootstrap for
-styling.
+Add images for users to have avatars, provinces and nations to have flags and
+possibly other images.  Add substantial game logic such as infrastructure,
+technology, money, and provincial government types.  Add Settlements, allowing
+users to found and grow settlements within their provinces for bonuses to
+growth.
 
 [Details][phase-two]
 
-### Phase 3: Notebooks and Tags (2 days)
+### Phase 3: Add Messages, Notifications, and national government (2 days)
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook, which has
-its own `Index` view. Create JSON API for Notebooks. Notes can also now be
-tagged with multiple tags. Users can bring up notes in a separate `SearchIndex`
-view by searching for their tags. Once the tag search is implemented, I will
-extend this to a fuzzy search through every Note's content.
+Allow users to send messages to other users, their nation, or the whole
+community.  Add notifications to inform users of messages or in-game events.
+Add customizable roles to government.
+
 
 [Details][phase-three]
 
-### Phase 4: Allow Complex Styling in Notes (1 day)
+### Phase 4: Add Stripe and store Items for microtransactions (3 days)
 
-Using quill.js, allow for complex styling of notes. 
+Allow users to buy small boosts for their provinces through an in-game store,
+and collect their cold hard cash with Stripe.
 
 [Details][phase-four]
 
-### Phase 5: Reminders and Garbage Collection (1 day)
+### Phase 5: Add warfare, cleanup and seeding (2 days)
 
-Phase 5 introduces two new features. First, users can set reminders on notes
-which will at the time they are set for prompt the user to review and edit the
-given note. In addition, I will implement a feature that asks users to review
-notes once they reach a certain age and ask whether they should be kept,
-archived, or deleted.
+Nation-building is all well and good, but the only thing anyone really cares
+about is tearing it all down.  Add warfare mechanic, and then tie up any loose
+ends and create seed info.
 
-[Details][phase-five]
+Details: TBA
 
-### Phase 6: Styling Cleanup and Seeding (1 day)
-
-Bootstrap will have been used to keep things organized up until now, but in
-Phase 6 I will add styling flourishes and make modals out of some elements (like
-the NotebookForm).
 
 ### Bonus Features (TBD)
-- [ ] Prettify transitions
-- [ ] Use javascript library for cleaner tag selection
-- [ ] Changelogs for Notes
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Multiple sessions
+- [ ] Province map (hexagon)
+- [ ] Nation map (stick hexes together)
+- [ ] Replace basic nation-wide messages with forums
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
 [phase-three]: ./docs/phases/phase3.md
 [phase-four]: ./docs/phases/phase4.md
-[phase-five]: ./docs/phases/phase5.md

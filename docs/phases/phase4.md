@@ -1,18 +1,18 @@
-# Phase 4: Allow Complex Styling in Notes (1 day)
+# Phase 4: Add Stripe and store Items for microtransactions (1 day)
 
 ## Rails
 ### Models
+StoreItem
 
 ### Controllers
+StoreItemsController
 
 ### Views
-
-## Flux
-### Views (React Components)
-
-### Stores
-
-### Actions
+store_items/new.html.erb
+store_items/show.html.erb
+store_items/index.html.erb
+store_items/edit.html.erb
 
 ## Gems/Libraries
-* Quill.js
+* stripe
+* friendly_id

@@ -1,29 +1,32 @@
-# Phase 1: User Authentication, Note Model and JSON API
+# Phase 1: User authentication, Province and Nation CRUD and MVC (2 days)
 
 ## Rails
 ### Models
 * User
-* Note
+* Province
+* Nation
 
 ### Controllers
 * UsersController (create, new)
 * SessionsController (create, new, destroy)
-* Api::NotesController (create, destroy, index, show, update)
+* ProvincesController (new, create, destroy, index, show, edit, update)
+* NationsController (new, create, destroy, index, show, edit, update)
 
 ### Views
+##### Users
 * users/new.html.erb
-* session/new.html.erb
-* notes/index.json.jbuilder
-* notes/show.json.jbuilder
-
-## Flux
-### Views (React Components)
-
-### Stores
-
-### Actions
-
-### ApiUtil
+* users/show.html.erb
+* users/index.html.erb
+* sessions/new.html.erb
+* provinces/new.html.erb
+* provinces/show.html.erb
+* provinces/index.html.erb
+* provinces/edit.html.erb
+* nations/new.html.erb
+* nations/show.html.erb
+* nations/index.html.erb
+* nations/edit.html.erb
 
 ## Gems/Libraries
 * BCrypt
+* Bootstrap (4.0.0 Alpha!  Cutting edge!)

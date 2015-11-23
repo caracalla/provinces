@@ -1,51 +1,91 @@
 # Schema Information
 
-## notes
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-title       | string    | not null
-body        | text      | not null
-author_id   | integer   | not null, foreign key (references users), indexed
-notebook_id | integer   | not null, foreign key (references notebooks), indexed
-archived    | boolean   | not null, default: false
-
-## notebooks
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references users), indexed
-title       | string    | not null
-description | string    | 
-
-## reminders
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users), indexed
-note_id     | string    | not null, foreign key (references notes), indexed
-date        | datetime  | not null
-type        | string    | not null
-prev_id     | integer   | foreign key (references reminders), indexed
-
-## tags
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-
-## taggings
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-note_id     | integer   | not null, foreign key (references notes), indexed, unique [tag_id]
-tag_id      | integer   | not null, foreign key (references tags), indexed
-
 ## users
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-username        | string    | not null, indexed, unique
+email           | string    | not null, indexed, unique
 password_digest | string    | not null
+username        | string    | not null, unique
 session_token   | string    | not null, indexed, unique
+admin           | boolean   | not null, default: false
+
+## provinces
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+user_id         | integer   | not null, foreign key (refs users), indexed
+nation_id       | integer   | not null, foreign key (refs nations), indexed
+name            | string    | not null, unique
+user_title      | string    | not null
+population      | integer   | not null, default: 0
+infrastructure  | integer   | not null, default: 0
+technology      | integer   | not null, default: 0
+money           | integer   | not null, default: 0
+currency_name   | string    | not null
+government_type | string    | not null
+tax_rate        | integer   | not null, default: 15
+description     | text      |
+
+## nations
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+name            | string    | not null, unique
+state           | string    | not null, default: "active"
+description     | text      |
+
+## settlements
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+province_id     | integer   | not null, foreign key (refs provinces), indexed
+name            | string    | not null
+population      | integer   | not null, default: 0
+
+## government_position
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+user_id         | integer   | not null, foreign key (refs users), indexed
+nation_id       | integer   | not null, foreign key (refs nations), indexed
+rank            | integer   | not null, default: 0
+title           | string    |
+
+## images
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+imageable_id    | integer   | not null, polymorphic
+imageable_type  | string    | not null, polymorphic
+url             | string    | not null
+primary         | boolean   | not null, default: false
+
+## messages
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+sender_id       | integer   | not null, foreign key (refs users), indexed
+recipient_id    | integer   | not null, polymorphic
+recipient_type  | integer   | not null, polymorphic
+state           | string    | not null, default: "unread"
+money           | integer   | not null, default: 0
+content         | text      | not null
+
+## notifications
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+user_id         | integer   | not null, foreign_key (refs users), indexed
+type            | string    | not null
+content         | string    | not null
+state           | string    | not null, default: "unseen"
+
+## store_items
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+price           | integer   | not null, default: 0
+money_boost     | integer   | not null, default: 0
+infrastructure  | integer   | not null, default: 0
+technology      | integer   | not null, default: 0
