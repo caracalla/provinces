@@ -8,7 +8,68 @@
 </head>
 <body>
 
-<%= yield %>
+<nav class="navbar navbar-light bg-faded">
+  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+    &#9776;
+  </button>
+
+  <%= link_to "Provinces", root_url, class: "navbar-brand" %>
+
+  <div class="collapse navbar-toggleable-xs" id="navbar-collapse">
+    <ul class="nav navbar-nav">
+      <li class="nav-item"><%= link_to "Home", root_url, class: "nav-link" %></li>
+      <li class="nav-item"><%= link_to "About", '#', class: "nav-link" %>
+      <li class="nav-item"><%= link_to "Contact", '#', class: "nav-link" %>
+    </ul>
+
+    <ul class="nav navbar-nav pull-right">
+      <% if current_user.nil? %>
+        <li class="nav-item"><%= link_to "Sign Up", new_user_url, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Sign In", new_session_url, class: "nav-link" %></li>
+      <% else %>
+        <li class="dropdown closed">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+            Account
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to "My Profile", user_url(current_user), class: "dropdown-item" %>
+            <%= button_to "Sign Out", session_url, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<br>
+
+<div class="container">
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="alert alert-<%= key %>">
+        <% if value.is_a?(Array) %>
+          <ul>
+            <% value.each do |item| %>
+              <li><%= item %></li>
+            <% end %>
+        <% else %>
+          <%= value %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="content">
+    <%= yield %>
+  </div>
+
+  <% if Rails.env.development? %>
+    <br>
+    <hr>
+    <%= debug(params) %>
+  <% end %>
+</div>
 
 </body>
 </html>
