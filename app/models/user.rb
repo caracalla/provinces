@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8, allow_nil: true }
   validates :password_digest, presence: { message: "Password cannot be blank" }
 
+  has_one :province
+
   after_initialize :ensure_session_token
 
   def password=(password)

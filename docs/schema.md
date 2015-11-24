@@ -15,7 +15,6 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 user_id         | integer   | not null, foreign key (refs users), indexed
-nation_id       | integer   | not null, foreign key (refs nations), indexed
 name            | string    | not null, unique
 user_title      | string    | not null
 population      | integer   | not null, default: 0
@@ -24,7 +23,9 @@ technology      | integer   | not null, default: 0
 money           | integer   | not null, default: 0
 currency_name   | string    | not null
 government_type | string    | not null
-tax_rate        | integer   | not null, default: 15
+local_tax_rate  | integer   | not null, default: 15
+resource_1      | string    | not null
+resource_2      | string    | not null
 description     | text      |
 
 ## nations
@@ -34,6 +35,8 @@ id              | integer   | not null, primary key
 name            | string    | not null, unique
 state           | string    | not null, default: "active"
 description     | text      |
+tax_rate        | integer   | not null, default: 15
+single_province | boolean   | not null
 
 ## settlements
 column name     | data type | details
@@ -43,14 +46,14 @@ province_id     | integer   | not null, foreign key (refs provinces), indexed
 name            | string    | not null
 population      | integer   | not null, default: 0
 
-## government_position
+## national membership
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
-user_id         | integer   | not null, foreign key (refs users), indexed
+province_id     | integer   | not null, foreign key (refs provinces), indexed
 nation_id       | integer   | not null, foreign key (refs nations), indexed
 rank            | integer   | not null, default: 0
-title           | string    |
+member_title    | string    |
 
 ## images
 column name     | data type | details

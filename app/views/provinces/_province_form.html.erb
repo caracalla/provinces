@@ -1,0 +1,42 @@
+<% action_url = province.persisted? ? province_url(province) : provinces_url %>
+<% method_value = province.persisted? ? "PATCH" : "POST" %>
+<% submit_value = province.persisted? ? "Save Changes" : "Create Province" %>
+
+<form action="<%= action_url %>" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <input type="hidden" name="_method" value="<%= method_value %>">
+
+  <div class="form-group">
+    <label for="province_name">Name</label>
+    <input  type="text"
+            name="province[name]"
+            id="province_name"
+            class="form-control"
+            value="<%= province.name %>">
+  </div>
+
+  <div class="form-group">
+    <label for="province_user_title">Email</label>
+    <input  type="text"
+            name="province[user_title]"
+            id="province_user_title"
+            class="form-control"
+            value="<%= province.user_title %>">
+  </div>
+
+  <div class="form-group">
+    <select>
+      province[currency_name]
+    </select>
+  </div>
+
+  <div class="form-group">
+    <input type="radio">province[government_type]
+  </div>
+
+  <div class="form-group">
+    <textarea name="province[description"><%= province.description %></textarea>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="<%= submit_value %>">
+</form>
