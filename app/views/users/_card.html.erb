@@ -1,0 +1,24 @@
+<div class="card" style="width: 16rem;">
+  <!-- <img class="card-img-top" src="http://i.imgur.com/ThslxBy.png"> -->
+  <%= image_tag"http://i.imgur.com/ThslxBy.png", size: "255x255", class: "card-img-top" %>
+
+  <div class="card-block">
+    <h4 class="card-title"><%= user.username %></h4>
+    <p class="card-text">User</p>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% if province %>
+      <li class="list-group-item">
+        <%= province.user_title %> of <%= link_to province.name, province_url(province) %>
+      </li>
+    <% end %>
+
+    <li class="list-group-item">Nations coming soon!</li>
+  </ul>
+
+  <div class="card-block">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

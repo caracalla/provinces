@@ -9,7 +9,11 @@ class SessionsController < ApplicationController
 
     if @user && login(@user)
       flash[:success] = "Signed in successfully"
-      redirect_to user_url(@user)
+      if @user.province
+        redirect_to province_url(@user.province)
+      else
+        redirect_to new_province_url
+      end
     else
       flash.now[:warning] = "Couldn't find a user with those credentials"
       render :new

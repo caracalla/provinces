@@ -1,6 +1,12 @@
 class Province < ActiveRecord::Base
-  CURRENCY_NAMES = %w(dollar yen yuan pound peso ruble dong rupee euro)
-  GOVERNMENT_TYPES = %w(Democracy Autocracy Monarchy Oligarchy Anarchy)
+  CURRENCY_NAMES = %w(dollar yen yuan pound peso ruble dong rupee euro talent)
+  GOVERNMENT_TYPES = {
+    "democracy" => "for whiners",
+    "autocracy" => "for manly men",
+    "monarchy" => "for kingly men",
+    "oligarchy" => "for rich men",
+    "anarchy" => "for crazy men"
+  }
   RESOURCES = %w(timber gold iron wine coal)
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
@@ -10,7 +16,7 @@ class Province < ActiveRecord::Base
     message: "%{value} is not a valid currency"
   }
   validates :government_type, presence: true, inclusion: {
-    in: GOVERNMENT_TYPES,
+    in: GOVERNMENT_TYPES.keys,
     message: "%{value} is not a valid system of governance"
     # Joke idea: add various forms of government I don't agree with to the
     # government picker, so when someone chooses it, this message is shown.
@@ -21,18 +27,18 @@ class Province < ActiveRecord::Base
     message: "%{value} is not a valid resource"
   }
   validates :population, :infrastructure, :technology, :local_tax_rate, numericality: {
-    greater_than: 0
+    greater_than_or_equal_to: 0
   }
 
   belongs_to :user
 
-  before_create :set_initial_values
+  before_validation :set_initial_values, on: :create
 
   private
 
   def set_initial_values
     self.resource_1 = RESOURCES.sample
-    self.resource_2 = RESOURCES.sample until resource_2 != resource_1
+    self.resource_2 = RESOURCES.reject { |r| r == resource_1 }.sample
     self.population = 100
     self.money = 50000
     self.infrastructure = 0

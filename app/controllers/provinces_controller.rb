@@ -1,5 +1,6 @@
 class ProvincesController < ApplicationController
-  before_action :get_province, only: [:show, :edit, :update]
+  before_action :get_province_and_user, only: [:show, :edit, :update]
+  before_action :redirect_user_with_province, only: [:new, :create]
 
   def new
     @province = Province.new
@@ -13,7 +14,8 @@ class ProvincesController < ApplicationController
       flash[:success] = "Province created!"
       redirect_to province_url(@province)
     else
-      flash.now[:warning] = "Unable to create province"
+      # fail
+      flash.now[:warning] = @province.errors.full_messages
       render :new
     end
   end
@@ -29,7 +31,7 @@ class ProvincesController < ApplicationController
       flash[:success] = "Province updated!"
       redirect_to province_url(@province)
     else
-      flash.now[:warning] = "Unable to update province"
+      flash.now[:warning] = @province.errors.full_messages
       render :edit
     end
   end
@@ -47,7 +49,12 @@ class ProvincesController < ApplicationController
     )
   end
 
-  def get_province
+  def get_province_and_user
     @province ||= Province.find(params[:id])
+    @user ||= @province.user
+  end
+
+  def redirect_user_with_province
+    redirect_to province_url(current_user.province) if current_user.province
   end
 end

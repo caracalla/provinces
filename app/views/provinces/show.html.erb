@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-3">
+    <%= render "users/card", user: @user, province: @province %>
+  </div>
+
+  <div class="col-md-9">
+    <h1><%= @province.name %></h1>
+    <%= link_to "Edit", edit_province_url(@province), class: "small" %>
+    <hr>
+
+    <p>Population: <%= @province.population %></p>
+    <p>Infrastructure: <%= @province.infrastructure %></p>
+    <p>Technology: <%= @province.technology %></p>
+    <p>Treasury: <%= @province.money %> <%= @province.currency_name.pluralize %></p>
+    <p>System of Governance: <%= @province.government_type.capitalize %></p>
+    <p>Tax Rate: <%= @province.local_tax_rate %>%</p>
+    <p>Resources: <%= @province.resource_1 %>, <%= @province.resource_2 %></p>
+    <p>Description: <%= @province.description %></p>
+  </div>
+</div>
