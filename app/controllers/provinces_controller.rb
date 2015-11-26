@@ -1,6 +1,8 @@
 class ProvincesController < ApplicationController
+  before_action :redirect_signed_out_user, except: :show
   before_action :get_province_and_user, only: [:show, :edit, :update]
   before_action :redirect_user_with_province, only: [:new, :create]
+  before_action :only_owner_or_admin, only: :destroy
 
   def new
     @province = Province.new
@@ -36,6 +38,12 @@ class ProvincesController < ApplicationController
     end
   end
 
+  def destroy
+    @province.destroy
+    flash[:success] = "Province destroyed"
+    redirect_to user_url(@user)
+  end
+
   private
 
   def province_params
@@ -56,5 +64,11 @@ class ProvincesController < ApplicationController
 
   def redirect_user_with_province
     redirect_to province_url(current_user.province) if current_user.province
+  end
+
+  def only_owner_or_admin
+    unless current_user.province == @province || current_user.admin?
+      redirect_to province_url(current_user.province)
+    end
   end
 end

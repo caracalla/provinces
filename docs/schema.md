@@ -33,10 +33,7 @@ column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
 name            | string    | not null, unique
-state           | string    | not null, default: "active"
 description     | text      |
-tax_rate        | integer   | not null, default: 15
-single_province | boolean   | not null
 
 ## settlements
 column name     | data type | details
@@ -53,7 +50,7 @@ id              | integer   | not null, primary key
 province_id     | integer   | not null, foreign key (refs provinces), indexed
 nation_id       | integer   | not null, foreign key (refs nations), indexed
 rank            | integer   | not null, default: 0
-member_title    | string    |
+member_title    | string    | not null, default: "Member"
 
 ## images
 column name     | data type | details

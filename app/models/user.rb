@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 8, allow_nil: true }
   validates :password_digest, presence: { message: "Password cannot be blank" }
 
-  has_one :province
+  has_one :province, dependent: :destroy
+  has_one :nation_membership, through: :province
+  has_one :nation, through: :nation_membership # :whoa:
 
   after_initialize :ensure_session_token
 

@@ -9,7 +9,10 @@
 <body>
 
 <nav class="navbar navbar-default bg-faded">
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+  <button class="navbar-toggler hidden-sm-up"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar-collapse">
     &#9776;
   </button>
 
@@ -23,6 +26,18 @@
             <%= link_to current_user.province.name,
                         province_url(current_user.province),
                         class: "nav-link" %>
+          </li>
+
+          <% if current_user.nation %>
+            <li class="nav-item">
+              <%= link_to current_user.nation.name,
+                          nation_url(current_user.nation),
+                          class: "nav-link" %>
+            </li>
+          <% end %>
+
+          <li class="nav-item">
+            <%= link_to "STORE!", "#", class: "nav-link btn btn-warning-outline" %>
           </li>
         <% else %>
           <li class="nav-item">

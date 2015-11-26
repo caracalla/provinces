@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-2">
     <%= render "users/card", user: @user, province: @province %>
   </div>
 
-  <div class="col-md-9">
+  <div class="col-md-10">
     <h1><%= @province.name %></h1>
     <%= link_to "Edit", edit_province_url(@province), class: "small" %>
     <hr>

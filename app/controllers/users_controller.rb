@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :redirect_signed_out_user, only: [:show, :edit, :update]
   before_action :redirect_signed_in_user, only: [:new, :create]
   before_action :get_user, only: [:show, :update]
 
@@ -26,7 +27,10 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def updates
+  def edit
+  end
+
+  def update
   end
 
   private

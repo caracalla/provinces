@@ -30,6 +30,9 @@ class Province < ActiveRecord::Base
     greater_than_or_equal_to: 0
   }
 
+  has_one :nation_membership, dependent: :destroy
+  has_one :nation, through: :nation_membership
+
   belongs_to :user
 
   before_validation :set_initial_values, on: :create

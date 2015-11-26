@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root to: "static_pages#home"
 
   resources :users, only: [:new, :create, :show, :index]
-  resources :provinces
+  resources :provinces, except: :index
+  resources :nations
 
   resource :session, only: [:new, :create, :destroy]
 
