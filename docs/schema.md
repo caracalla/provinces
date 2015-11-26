@@ -43,7 +43,7 @@ province_id     | integer   | not null, foreign key (refs provinces), indexed
 name            | string    | not null
 population      | integer   | not null, default: 0
 
-## national membership
+## nation memberships
 column name     | data type | details
 ----------------|-----------|-----------------------
 id              | integer   | not null, primary key
@@ -51,6 +51,7 @@ province_id     | integer   | not null, foreign key (refs provinces), indexed
 nation_id       | integer   | not null, foreign key (refs nations), indexed
 rank            | integer   | not null, default: 0
 member_title    | string    | not null, default: "Member"
+state           | string    | not null, default: "inactive"
 
 ## images
 column name     | data type | details

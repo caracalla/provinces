@@ -1,8 +1,8 @@
 class ProvincesController < ApplicationController
   before_action :redirect_signed_out_user, except: :show
-  before_action :get_province_and_user, only: [:show, :edit, :update]
+  before_action :get_province, only: [:show, :edit, :update, :destroy]
   before_action :redirect_user_with_province, only: [:new, :create]
-  before_action :only_owner_or_admin, only: :destroy
+  before_action :only_owner_or_admin, only: [:edit, :update, :destroy]
 
   def new
     @province = Province.new
@@ -13,16 +13,17 @@ class ProvincesController < ApplicationController
     @province.user_id = current_user.id
 
     if @province.save
+      # create user notfication
       flash[:success] = "Province created!"
       redirect_to province_url(@province)
     else
-      # fail
       flash.now[:warning] = @province.errors.full_messages
       render :new
     end
   end
 
   def show
+    @user = @province.user
   end
 
   def edit
@@ -57,9 +58,8 @@ class ProvincesController < ApplicationController
     )
   end
 
-  def get_province_and_user
+  def get_province
     @province ||= Province.find(params[:id])
-    @user ||= @province.user
   end
 
   def redirect_user_with_province

@@ -17,12 +17,13 @@ ActiveRecord::Schema.define(version: 20151125225031) do
   enable_extension "plpgsql"
 
   create_table "nation_memberships", force: :cascade do |t|
-    t.integer  "rank",         default: 0,        null: false
-    t.string   "member_title", default: "Member", null: false
-    t.integer  "province_id",                     null: false
-    t.integer  "nation_id",                       null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.integer  "rank",         default: 0,          null: false
+    t.string   "member_title", default: "Member",   null: false
+    t.string   "state",        default: "inactive", null: false
+    t.integer  "province_id",                       null: false
+    t.integer  "nation_id",                         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "nation_memberships", ["nation_id"], name: "index_nation_memberships_on_nation_id", using: :btree
