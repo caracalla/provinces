@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
   def redirect_signed_in_user
     redirect_to root_url if current_user
   end
+
+  def redirect_user_without_province
+    redirect_to new_province_url if current_user.province.nil?
+  end
 end

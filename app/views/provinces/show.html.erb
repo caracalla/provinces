@@ -4,17 +4,39 @@
   </div>
 
   <div class="col-md-10">
-    <h1><%= @province.name %></h1>
-    <%= link_to "Edit", edit_province_url(@province), class: "small" %>
+    <div class="row">
+      <div class="col-md-6">
+        <h1 class="text-center"><%= @province.name %></h1>
+        <%= link_to "Edit", edit_province_url(@province), class: "small text-center" if current_user == @province.user %>
+
+        <% if @province.nation %>
+          <h4 class="text-center"><%= link_to @province.nation.name, nation_url(@province.nation)%></h4>
+        <% end %>
+      </div>
+
+      <div class="col-md-6">
+        <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/4/4f/Naval_Ensign_of_Japan.svg", width: 150, class: "center-block" %>
+      </div>
+    </div>
+
     <hr>
 
-    <p>Population: <%= @province.population %></p>
-    <p>Infrastructure: <%= @province.infrastructure %></p>
-    <p>Technology: <%= @province.technology %></p>
-    <p>Treasury: <%= @province.money %> <%= @province.currency_name.pluralize %></p>
-    <p>System of Governance: <%= @province.government_type.capitalize %></p>
-    <p>Tax Rate: <%= @province.local_tax_rate %>%</p>
-    <p>Resources: <%= @province.resource_1 %>, <%= @province.resource_2 %></p>
-    <p>Description: <%= @province.description %></p>
+    <div class="row">
+      <div class="col-md-6">
+        <p class="small text-muted text-center">map placeholder</p>
+        <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
+      </div>
+
+      <div class="col-md-6">
+        <p>Population: <%= @province.population %></p>
+        <p>Infrastructure: <%= @province.infrastructure %></p>
+        <p>Technology: <%= @province.technology %></p>
+        <p>Treasury: <%= @province.money %> <%= @province.currency_name.pluralize %></p>
+        <p>System of Governance: <%= @province.government_type.capitalize %></p>
+        <p>Tax Rate: <%= @province.local_tax_rate %>%</p>
+        <p>Resources: <%= @province.resource_1 %>, <%= @province.resource_2 %></p>
+        <p>Description: <%= @province.description %></p>
+      </div>
+    </div>
   </div>
 </div>

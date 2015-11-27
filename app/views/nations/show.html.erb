@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-6">
+    <h1 class="text-center"><%= @nation.name %></h1>
+    <%= link_to "Edit", edit_nation_url(@nation), class: "small text-center" %>
+  </div>
+
+  <div class="col-md-6">
+    <%= if current_user.nation.nil? %>
+
+      <%= button_to "Join", nation_memberships_url, method: :post, class: "dropdown-item" %>
+    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/4/4f/Naval_Ensign_of_Japan.svg", width: 150, class: "center-block" %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6">
+    <p class="small text-muted text-center">map placeholder</p>
+    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
+  </div>
+
+  <div class="col-md-6">
+    <% @provinces.each do |province| %>
+      <%= render "provinces/card", province: province, user: province.user, nation: @nation %>
+    <% end %>
+  </div>
+</div>

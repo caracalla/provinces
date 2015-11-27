@@ -34,10 +34,16 @@
                           nation_url(current_user.nation),
                           class: "nav-link" %>
             </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Create a Nation",
+                          new_nation_url,
+                          class: "nav-link btn btn-primary-outline" %>
+            </li>
           <% end %>
 
           <li class="nav-item">
-            <%= link_to "STORE!", "#", class: "nav-link btn btn-warning-outline" %>
+            <%= link_to "STORE!", "#", class: "nav-link btn btn-warning" %>
           </li>
         <% else %>
           <li class="nav-item">
@@ -57,7 +63,7 @@
         <li class="nav-item"><%= link_to "Sign In", new_session_url, class: "nav-link" %></li>
       <% else %>
         <li class="dropdown closed">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+          <button class="btn btn-primary-outline dropdown-toggle" type="button" data-toggle="dropdown">
             Account
           </button>
 

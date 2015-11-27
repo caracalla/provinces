@@ -4,20 +4,20 @@
 
   <div class="card-block">
     <h4 class="card-title"><%= user.username %></h4>
-    <p class="card-text">User</p>
   </div>
 
   <% if province %>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        <%= province.user_title %> of <%= link_to province.name, province_url(province) %>
+        <strong><%= province.user_title %></strong> of <%= link_to province.name, province_url(province) %>
       </li>
 
-      <li class="list-group-item">Caesar of <%= link_to "Rome", '#' %></li>
+      <% if province.nation %>
+        <li class="list-group-item">
+          <strong><%= province.nation_membership.member_title %></strong>
+           of <%= link_to province.nation.name, nation_url(province.nation) %>
+        </li>
+      <% end %>
     </ul>
   <% end %>
-
-  <div class="card-block">
-    <a href="#" class="card-link">Card link</a>
-  </div>
 </div>

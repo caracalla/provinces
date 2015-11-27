@@ -6,6 +6,7 @@
 <form action="<%= action_url %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="<%= method_value %>">
+
   <div class="row">
     <div class="col-md-4 col-md-offset-1">
       <div class="form-group">
@@ -71,9 +72,9 @@
                   class="form-control"><%= province.description %></textarea>
       </div>
     </div>
+  </div>
 
-    <div class="text-center">
-      <input type="submit" class="btn btn-primary" value="<%= submit_value %>">
-    </div>
+  <div class="text-center">
+    <input type="submit" class="btn btn-primary" value="<%= submit_value %>">
   </div>
 </form>

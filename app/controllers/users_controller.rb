@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       login(@user)
       flash[:success] = "Welcome to Provinces!"
-      redirect_to user_url(@user)
+      redirect_to new_province_url
     else
       flash.now[:warning] = @user.errors.full_messages
       render :new

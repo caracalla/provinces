@@ -2,6 +2,7 @@ class NationsController < ApplicationController
   before_action :redirect_signed_out_user, except: [:show, :index]
   before_action :get_nation, only: [:show, :edit, :update, :destroy]
   before_action :redirect_user_with_nation, only: [:new, :create]
+  before_action :redirect_user_without_province, except: [:show, :index]
 
   def new
     @nation = Nation.new
@@ -11,6 +12,14 @@ class NationsController < ApplicationController
     @nation = Nation.new(nation_params)
 
     if @nation.save
+      NationMembership.create(
+        nation_id: @nation.id,
+        province_id: current_user.province.id,
+        rank: 0,
+        member_title: "Founder",
+        state: "active"
+      )
+
       flash[:success] = "Nation created!"
       redirect_to nation_url(@nation)
     else
@@ -20,6 +29,7 @@ class NationsController < ApplicationController
   end
 
   def show
+    @provinces = @nation.provinces
   end
 
   private
