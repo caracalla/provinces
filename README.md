@@ -10,7 +10,7 @@ vie for global dominance through warfare and eminently affordable bonuses! :mone
 
 - [x] Create an account
 - [x] Log in / Log out
-- [ ] Create, read, edit, and delete provinces and nations
+- [x] Create, read, edit, and delete provinces and nations
 - [ ] Add avatars and flags
 - [ ] Add cities and additional game logic
 - [ ] Add messages and notifications
@@ -24,7 +24,7 @@ vie for global dominance through warfare and eminently affordable bonuses! :mone
 [schema]: ./docs/schema.md
 
 ## Implementation Timeline
-Note: Time estimates are full days of work, not calendar days>
+Note: Time estimates are full days of work, not calendar days
 
 ### Phase 1: User authentication, Province and Nation CRUD and MVC (2 days)
 
