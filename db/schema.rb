@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151125225031) do
   enable_extension "plpgsql"
 
   create_table "nation_memberships", force: :cascade do |t|
-    t.integer  "rank",         default: 0,          null: false
+    t.integer  "rank"
     t.string   "member_title", default: "Member",   null: false
     t.string   "state",        default: "inactive", null: false
     t.integer  "province_id",                       null: false

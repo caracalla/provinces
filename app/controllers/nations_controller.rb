@@ -1,8 +1,9 @@
 class NationsController < ApplicationController
   before_action :redirect_signed_out_user, except: [:show, :index]
-  before_action :get_nation, only: [:show, :edit, :update, :destroy]
+  before_action :get_nation, only: [:show, :edit, :update, :destroy, :members]
   before_action :redirect_user_with_nation, only: [:new, :create]
   before_action :redirect_user_without_province, except: [:show, :index]
+  before_action :only_nation_admin, only: [:edit, :update]
 
   def new
     @nation = Nation.new
@@ -20,6 +21,8 @@ class NationsController < ApplicationController
         state: "active"
       )
 
+      current_user.province.pending_nation_memberships.destroy_all
+
       flash[:success] = "Nation created!"
       redirect_to nation_url(@nation)
     else
@@ -30,6 +33,11 @@ class NationsController < ApplicationController
 
   def show
     @provinces = @nation.provinces
+  end
+
+  def members
+    @members = NationMembership.where(nation_id: @nation.id).where(state: "active")
+    @pending_members = NationMembership.where(nation_id: @nation.id).where(state: "pending")
   end
 
   private
@@ -46,6 +54,7 @@ class NationsController < ApplicationController
     redirect_to nation_url(current_user.nation) if current_user.nation
   end
 
-  def only_leader_or_admin
+  def only_nation_admin
+    redirect_to nation_url(@nation) unless current_user.nation_admin?(@nation)
   end
 end

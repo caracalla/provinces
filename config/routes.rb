@@ -3,7 +3,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :show, :index]
   resources :provinces, except: :index
-  resources :nations
+
+  resources :nations do
+    get "members", on: :member
+  end
+
+  resources :nation_memberships, only: [:create, :update, :destroy] do
+    post "approve", on: :member
+  end
 
   resource :session, only: [:new, :create, :destroy]
 

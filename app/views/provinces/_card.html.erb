@@ -1,0 +1,16 @@
+<div class="card">
+  <%= image_tag"https://upload.wikimedia.org/wikipedia/commons/4/4f/Naval_Ensign_of_Japan.svg", class: "img-fluid card-img-top" %>
+
+  <div class="card-block">
+    <%= link_to province.name, province_url(province), class: "lead card-link" %>
+    <%= link_to "(Edit)", edit_province_url(@province), class: "small text-center" if current_user == @province.user %>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% if province.nation %>
+      <li class="list-group-item">
+        <strong>Member</strong> of <%= link_to province.nation.name, nation_url(province.nation) %>
+      </li>
+    <% end %>
+  </ul>
+</div>

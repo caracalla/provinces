@@ -37,6 +37,19 @@ class User < ActiveRecord::Base
     SecureRandom::urlsafe_base64(16)
   end
 
+  def has_applied_to_join?(nation)
+    province.pending_nation_memberships.where(nation_id: nation.id).empty?
+  end
+
+  def nation_admin?(nation)
+    return if nation_membership.nil? || nation.nil?
+
+    nation_membership.nation_id == nation.id &&
+      nation_membership.state == "active" &&
+      !nation_membership.rank.nil? &&
+      nation_membership.rank < 2
+  end
+
   private
 
   def ensure_session_token

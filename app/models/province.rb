@@ -30,7 +30,8 @@ class Province < ActiveRecord::Base
     greater_than_or_equal_to: 0
   }
 
-  has_one :nation_membership, dependent: :destroy
+  has_many :pending_nation_memberships, -> { where state: "pending" }, class_name: NationMembership, dependent: :destroy
+  has_one :nation_membership, -> { where state: "active" }, dependent: :destroy
   has_one :nation, through: :nation_membership
 
   belongs_to :user
@@ -46,5 +47,9 @@ class Province < ActiveRecord::Base
     self.money = 50000
     self.infrastructure = 0
     self.technology = 0
+  end
+
+  def has_nation?
+    self.nation_membership.state == "active"
   end
 end

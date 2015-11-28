@@ -1,7 +1,7 @@
 class CreateNationMemberships < ActiveRecord::Migration
   def change
     create_table :nation_memberships do |t|
-      t.integer :rank, null: false, default: 0
+      t.integer :rank
       t.string :member_title, null: false, default: "Member"
       t.string :state, null: false, default: "inactive"
 

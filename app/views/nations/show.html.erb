@@ -1,28 +1,33 @@
 <div class="row">
-  <div class="col-md-6">
-    <h1 class="text-center"><%= @nation.name %></h1>
-    <%= link_to "Edit", edit_nation_url(@nation), class: "small text-center" %>
+  <div class="col-md-2">
+    <%= render "card", nation: @nation %>
   </div>
 
-  <div class="col-md-6">
-    <%= if current_user.nation.nil? %>
+  <div class="col-md-10">
+    <div class="row">
+      <div class="col-md-6">
+        <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
+        <p class="small text-muted text-center">map placeholder</p>
+      </div>
 
-      <%= button_to "Join", nation_memberships_url, method: :post, class: "dropdown-item" %>
-    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/4/4f/Naval_Ensign_of_Japan.svg", width: 150, class: "center-block" %>
-  </div>
-</div>
+      <div class="col-md-6">
+        <% if current_user.nation_membership.nil? && current_user.has_applied_to_join?(@nation) %>
+          <form action="<%= nation_memberships_url %>" method="POST">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="nation_membership[nation_id]" value="<%= @nation.id %>">
 
-<hr>
+            <input type="submit" class="btn btn-primary" value="Join">
+          </form>
 
-<div class="row">
-  <div class="col-md-6">
-    <p class="small text-muted text-center">map placeholder</p>
-    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
-  </div>
+          <hr>
+        <% end %>
 
-  <div class="col-md-6">
-    <% @provinces.each do |province| %>
-      <%= render "provinces/card", province: province, user: province.user, nation: @nation %>
-    <% end %>
+        <% @provinces.each do |province| %>
+          <div class="card card-block">
+            <p class="card-text"><%= province.name %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

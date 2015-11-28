@@ -1,0 +1,12 @@
+<div class="card">
+  <%= image_tag"https://upload.wikimedia.org/wikipedia/commons/4/4f/Naval_Ensign_of_Japan.svg", class: "img-fluid card-img-top" %>
+
+  <div class="card-block">
+    <%= link_to nation.name, nation_url(nation), class: "lead card-link" %>
+    <%= link_to "(Edit)", edit_nation_url(@nation), class: "small text-center" %>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= link_to "Members", members_nation_url, class: "card-link" %></li>
+  </ul>
+</div>

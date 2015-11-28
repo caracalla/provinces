@@ -1,0 +1,66 @@
+<div class="card">
+  <h3 class="card-header">Members:</h3>
+
+  <% @members.each do |member| %>
+
+    <div class="row card-block">
+      <div class="col-md-2">
+        <strong class="lead"><%= member.province.user.username %></strong>
+      </div>
+
+      <div class="col-md-2">
+        <% if current_user.province == member.province %>
+          <%= button_to "Leave Nation", nation_membership_url(member), method: :delete, class: "btn btn-danger" %>
+        <% elsif current_user.nation_admin?(@nation) %>
+          <%= button_to "Remove", nation_membership_url(member), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </div>
+
+      <div class-"col-md-6">
+        <form action="<%= nation_membership_url(member) %>" method= "POST" class="form-inline pull-right">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="PATCH">
+
+          <div class="form-group">
+            <input  type="text"
+                    class="form-control"
+                    name="nation_membership[rank]"
+                    value="<%= member.rank %>"
+                    placeholder="7">
+          </div>
+
+          <div class="form-group">
+            <input  type="text"
+                    class="form-control"
+                    name="nation_membership[member_title]"
+                    value="<%= member.member_title %>"
+                    placeholder="Member">
+          </div>
+
+          <input type="submit" class="btn btn-primary" value="Update">
+        </form>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if current_user.nation_admin?(@nation) && !@pending_members.empty? %>
+  <div class="card">
+
+    <h4 class="card-header">Pending Members:</h4>
+    <% @pending_members.each do |pending| %>
+      <div class="row card-block">
+        <div class="col-md-2">
+          <p class="lead"><%= pending.province.user.username %></p>
+        </div>
+
+        <div class="col-md-2 col-md-offset-6">
+          <div class="btn-group"> <!-- TABLEFLIP -->
+            <%= link_to "Approve", approve_nation_membership_url(pending), method: :post, class: "btn btn-primary" %>
+            <%= link_to "Deny", nation_membership_url(pending), method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
