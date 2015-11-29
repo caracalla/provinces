@@ -54,8 +54,8 @@
           <p class="lead"><%= pending.province.user.username %></p>
         </div>
 
-        <div class="col-md-2 col-md-offset-6">
-          <div class="btn-group"> <!-- TABLEFLIP -->
+        <div class="col-md-10">
+          <div class="btn-group pull-right">
             <%= link_to "Approve", approve_nation_membership_url(pending), method: :post, class: "btn btn-primary" %>
             <%= link_to "Deny", nation_membership_url(pending), method: :delete, class: "btn btn-danger" %>
           </div>
