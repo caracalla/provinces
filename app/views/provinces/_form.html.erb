@@ -2,7 +2,6 @@
 <% method_value = province.persisted? ? "PATCH" : "POST" %>
 <% submit_value = province.persisted? ? "Save Changes" : "Create Province" %>
 
-
 <form action="<%= action_url %>" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="<%= method_value %>">

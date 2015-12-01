@@ -10,6 +10,11 @@ class User < ActiveRecord::Base
   has_one :nation_membership, through: :province
   has_one :nation, through: :nation_membership # :whoa:
 
+  # Paperclip, for avatars
+  has_attached_file :avatar, styles: { medium: "300x300>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates_with AttachmentSizeValidator, attributes: :avatar, less_than: 1.megabytes
+
   after_initialize :ensure_session_token
 
   def password=(password)

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :redirect_signed_out_user, only: [:show, :edit, :update]
   before_action :redirect_signed_in_user, only: [:new, :create]
-  before_action :get_user, only: [:show, :update]
+  before_action :get_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params[:user].permit( :username, :password, :email)
+    params[:user].permit( :username, :password, :email, :avatar)
   end
 
   def get_user

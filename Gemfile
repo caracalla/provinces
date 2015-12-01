@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 gem 'bootstrap', '~> 4.0.0.alpha1'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem "paperclip", "~> 4.3"
 
 group :development, :test do
   gem 'byebug'
