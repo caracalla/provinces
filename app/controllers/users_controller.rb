@@ -31,12 +31,19 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update(user_params)
+      flash[:success] = "Profile updated!"
+      redirect_to province_url(@user.province)
+    else
+      flash[:warning] = @user.errors.full_messages
+      render :edit
+    end
   end
 
   private
 
   def user_params
-    params[:user].permit( :username, :password, :email, :avatar)
+    params[:user].permit(:username, :password, :email, :avatar)
   end
 
   def get_user

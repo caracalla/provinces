@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root to: "static_pages#home"
 
-  resources :users, only: [:new, :create, :show, :index, :edit, :update]
+  resource :session, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :edit, :update]
   resources :provinces, except: :index
 
   resources :nations do
@@ -11,8 +12,6 @@ Rails.application.routes.draw do
   resources :nation_memberships, only: [:create, :update, :destroy] do
     post "approve", on: :member
   end
-
-  resource :session, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,27 +1,6 @@
 <% action_url = user.persisted? ? user_url(user) : users_url %>
 <% method = user.persisted? ? "patch" : "post" %>
-<% submit_text = user.persisted? ? "Save Changes" : "Create Nation" %>
-
-<form action="<%= action_url %>" method="<%= nil %>">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-  <div class="form-group">
-    <label for="user_username">Username</label>
-    <input type="text" name="user[username]" id="user_username" class="form-control" value="<%= user.username %>">
-  </div>
-
-  <div class="form-group">
-    <label for="user_email">Email</label>
-    <input type="text" name="user[email]" id="user_email" class="form-control" value="<%= user.email %>">
-  </div>
-
-  <div class="form-group">
-    <label for="user_password">Password</label>
-    <input type="password" name="user[password]" id="user_password" class="form-control">
-  </div>
-
-  <input type="submit" class="btn btn-primary" value="Sign Up">
-</form>
+<% submit_text = user.persisted? ? "Save Changes" : "Sign Up" %>
 
 <%= form_for user, url: action_url, method: method, html: { multipart: true } do |form| %>
   <div class="form-group">
@@ -29,6 +8,21 @@
     <%= form.text_field :username, class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
 
-  <%= form.file_field :avatar %>
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+    <%= image_tag(user.avatar.url(:medium), height: "200", class: "img-rounded") if user.persisted? %>
+  </div>
+
+  <%= form.submit submit_text, class: "btn btn-primary" %>
 <% end %>

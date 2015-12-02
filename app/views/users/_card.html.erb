@@ -1,9 +1,12 @@
 <div class="card">
   <%#= image_tag "http://i.imgur.com/ThslxBy.png", class: "img-fluid card-img-top" %>
-  <%= image_tag @user.avatar.url, class: "img-fluid card-img-top" %>
+  <%= image_tag @user.avatar.url(:medium), class: "img-fluid card-img-top" %>
 
   <div class="card-block">
     <h4 class="card-title"><%= user.username %></h4>
+    <% if current_user == user || current_user.admin? %>
+      <%= link_to "Edit Profile", edit_user_url(user), class: "small" %>
+    <% end %>
   </div>
 
   <% if province %>
