@@ -35,6 +35,19 @@ class NationsController < ApplicationController
     @provinces = @nation.provinces
   end
 
+  def edit
+  end
+
+  def update
+    if @nation.update(nation_params)
+      flash[:success] = "Nation updated!"
+      redirect_to nation_url(@nation)
+    else
+      flash.now[:warning] = @nation.errors.full_messages
+      render :edit
+    end
+  end
+
   def members
     @members = NationMembership.where(nation_id: @nation.id).where(state: "active")
     @pending_members = NationMembership.where(nation_id: @nation.id).where(state: "pending")
@@ -43,7 +56,7 @@ class NationsController < ApplicationController
   private
 
   def nation_params
-    params[:nation].permit(:name, :description)
+    params[:nation].permit(:name, :description, :flag)
   end
 
   def get_nation

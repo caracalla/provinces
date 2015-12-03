@@ -1,33 +1,30 @@
 <% action_url = nation.persisted? ? nation_url(nation) : nations_url %>
-<% method_value = nation.persisted? ? "PATCH" : "POST" %>
-<% submit_value = nation.persisted? ? "Save Changes" : "Create Nation" %>
+<% method = nation.persisted? ? "patch" : "post" %>
+<% submit_text = nation.persisted? ? "Save Changes" : "Create Nation" %>
 
-<form action="<%= action_url %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="<%= method_value %>">
-
+<%= form_for nation, url: action_url, method: method, html: { multipart: true } do |form| %>
   <div class="row">
     <div class="col-md-4 col-md-offset-4">
       <div class="form-group">
-        <label for="nation_name" class="lead">Name</label>
-        <input  type="text"
-                name="nation[name]"
-                id="nation_name"
-                class="form-control"
-                value="<%= nation.name %>">
+        <%= form.label :name, class: "lead" %>
+        <%= form.text_field :name, class: "form-control", value: nation.name %>
       </div>
 
       <div class="form-group">
-        <label for="nation_description" class="lead">Description</label>
-        <textarea name="nation[description]"
-                  id="nation_description"
-                  rows="3"
-                  class="form-control"><%= nation.description %></textarea>
+        <%= form.label :description, class: "lead" %>
+        <%= form.text_area :description, class: "form-control", rows: 3, value: nation.description %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :flag, class: "lead" %>
+        <%= form.file_field :flag, class: "form-control-file" %>
+        <br>
+        <%= image_tag(nation.flag.url(:medium), height: "150", class: "img-rounded") if nation.persisted? %>
       </div>
     </div>
   </div>
 
   <div class="text-center">
-    <input type="submit" class="btn btn-primary" value="<%= submit_value %>">
+    <%= form.submit submit_text, class: "btn btn-primary" %>
   </div>
-</form>
+<% end %>

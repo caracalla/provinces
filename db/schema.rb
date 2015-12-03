@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202074528) do
+ActiveRecord::Schema.define(version: 20151203011732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,14 @@ ActiveRecord::Schema.define(version: 20151202074528) do
   add_index "nation_memberships", ["province_id"], name: "index_nation_memberships_on_province_id", using: :btree
 
   create_table "nations", force: :cascade do |t|
-    t.string   "name",        null: false
+    t.string   "name",              null: false
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "flag_file_name"
+    t.string   "flag_content_type"
+    t.integer  "flag_file_size"
+    t.datetime "flag_updated_at"
   end
 
   create_table "provinces", force: :cascade do |t|
