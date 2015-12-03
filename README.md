@@ -11,7 +11,7 @@ vie for global dominance through warfare and eminently affordable bonuses! :mone
 - [x] Create an account
 - [x] Log in / Log out
 - [x] Create, read, edit, and delete provinces and nations
-- [ ] Add avatars and flags
+- [x] Add avatars and flags
 - [ ] Add cities and additional game logic
 - [ ] Add messages and notifications
 - [ ] Nation governance
