@@ -1,11 +1,12 @@
 class Province < ActiveRecord::Base
   CURRENCY_NAMES = %w(dollar yen yuan pound peso ruble dong rupee euro talent)
   GOVERNMENT_TYPES = {
-    "democracy" => "for whiners",
-    "autocracy" => "for manly men",
-    "monarchy" => "for kingly men",
-    "oligarchy" => "for rich men",
-    "anarchy" => "for crazy men"
+    "democracy" => "makes people happier, dings infra",
+    "autocracy" => "makes people unhappier, boosts infra",
+    "monarchy" => "makes people happier, dings tech",
+    "oligarchy" => "makes people unhappier, boosts tech",
+    "military junta" => "makes people unhappier, boosts military",
+    "anarchy" => "makes people unhappier, dings all things"
   }
   RESOURCES = %w(timber gold iron wine coal)
 
@@ -35,6 +36,10 @@ class Province < ActiveRecord::Base
   has_one :nation, through: :nation_membership
 
   belongs_to :user
+
+  has_attached_file :flag, styles: { medium: "300x300>" }, default_url: "/images/:style/default_flag.svg"
+  validates_attachment_content_type :flag, content_type: /\Aimage\/.*\Z/
+  validates_with AttachmentSizeValidator, attributes: :flag, less_than: 1.megabytes
 
   before_validation :set_initial_values, on: :create
 

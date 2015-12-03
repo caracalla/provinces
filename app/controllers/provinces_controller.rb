@@ -54,7 +54,8 @@ class ProvincesController < ApplicationController
       :currency_name,
       :government_type,
       :local_tax_rate,
-      :description
+      :description,
+      :flag
     )
   end
 

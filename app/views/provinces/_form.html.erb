@@ -1,51 +1,36 @@
 <% action_url = province.persisted? ? province_url(province) : provinces_url %>
-<% method_value = province.persisted? ? "PATCH" : "POST" %>
-<% submit_value = province.persisted? ? "Save Changes" : "Create Province" %>
+<% method = province.persisted? ? "patch" : "post" %>
+<% submit_text = province.persisted? ? "Save Changes" : "Create Province" %>
 
-<form action="<%= action_url %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <input type="hidden" name="_method" value="<%= method_value %>">
-
+<%= form_for province, url: action_url, method: method, html: { multipart: true } do |form| %>
   <div class="row">
-    <div class="col-md-4 col-md-offset-1">
+    <div class="col-md-5 col-md-offset-1">
       <div class="form-group">
-        <label for="province_name" class="lead">Name</label>
-        <input  type="text"
-                name="province[name]"
-                id="province_name"
-                class="form-control"
-                value="<%= province.name %>">
+        <%= form.label :name, class: "lead" %>
+        <%= form.text_field :name, class: "form-control", value: province.name %>
       </div>
 
       <div class="form-group">
-        <label for="province_user_title" class="lead">Ruler Title</label>
-        <input  type="text"
-                name="province[user_title]"
-                id="province_user_title"
-                class="form-control"
-                value="<%= province.user_title %>"
-                placeholder="Caeser">
+        <%= form.label :user_title, class: "lead" %>
+        <%= form.text_field :user_title, class: "form-control", value: province.user_title %>
       </div>
 
       <div class="form-group">
-        <label for="province_currency_name" class="lead">Currency</label>
-        <select name="province[currency_name]"
-                id="province_currency_name"
-                class="form-control c-select">
-          <option disabled <%= "selected" if @province.currency_name.nil? %>>
-            Select a currency
-          </option>
+        <%= form.label :currency_name, class: "lead" %>
+        <%= form.select :currency_name,
+          Province::CURRENCY_NAMES.collect { |name| [name.capitalize, name] },
+          { include_blank: true },
+          class: "form-control c-select"
+        %>
+      </div>
 
-          <% Province::CURRENCY_NAMES.each do |name| %>
-            <option value="<%= name %>" <%= "selected" if @province.currency_name == name %>>
-              <%= name.capitalize %>
-            </option>
-          <% end %>
-        </select>
+      <div class="form-group">
+        <%= form.label :description, class: "lead" %>
+        <%= form.text_area :description, class: "form-control", rows: 3, value: province.description %>
       </div>
     </div>
 
-    <div class="col-md-4 col-md-offset-2">
+    <div class="col-md-5">
       <div class="form-group">
         <label for="province_government_type" class="lead">Government Type</label>
 
@@ -64,16 +49,15 @@
       </div>
 
       <div class="form-group">
-        <label for="province_description" class="lead">Description</label>
-        <textarea name="province[description]"
-                  id="province_description"
-                  rows="3"
-                  class="form-control"><%= province.description %></textarea>
+        <%= form.label :flag, class: "lead" %>
+        <%= form.file_field :flag, class: "form-control-file" %>
+        <br>
+        <%= image_tag(province.flag.url(:medium), height: "150", class: "img-rounded") if province.persisted? %>
       </div>
     </div>
   </div>
 
   <div class="text-center">
-    <input type="submit" class="btn btn-primary" value="<%= submit_value %>">
+    <%= form.submit submit_text, class: "btn btn-primary" %>
   </div>
-</form>
+<% end %>
