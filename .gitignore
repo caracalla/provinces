@@ -12,7 +12,6 @@
 !/log/.keep
 /tmp
 .DS_Store
-/public/images
 /public/system
 # Ignore application configuration
 /config/application.yml
