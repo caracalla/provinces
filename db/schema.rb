@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203011732) do
+ActiveRecord::Schema.define(version: 20151203013810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body",                         null: false
+    t.integer  "money",            default: 0
+    t.integer  "user_id",                      null: false
+    t.integer  "messageable_id",               null: false
+    t.string   "messageable_type",             null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "messages", ["messageable_id"], name: "index_messages_on_messageable_id", using: :btree
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "nation_memberships", force: :cascade do |t|
     t.integer  "rank"
