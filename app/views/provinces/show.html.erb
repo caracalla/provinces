@@ -30,6 +30,15 @@
         <h3 class="text-center">Send a message to <%= @user.username %></h3>
 
         <%= form_for @message do |form| %>
+          <%= form.hidden_field :messageable_type, value: User %>
+          <%= form.hidden_field :messageable_id, value: @user.id %>
+          <%= form.hidden_field :sender_id, value: current_user.id %>
+
+          <div class="form-group">
+            <%= form.text_area :body, class: "form-control" %>
+          </div>
+
+          <%= form.submit "Send", class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>

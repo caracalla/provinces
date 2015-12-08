@@ -24,6 +24,7 @@ class ProvincesController < ApplicationController
 
   def show
     @user = @province.user
+    @message = Message.new
   end
 
   def edit

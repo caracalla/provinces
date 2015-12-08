@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
-  before_action :redirect_signed_out_user, only: [:show, :edit, :update]
+  before_action :redirect_signed_out_user, only: [:show, :edit, :update, :inbox]
   before_action :redirect_signed_in_user, only: [:new, :create]
-  before_action :get_user, only: [:show, :edit, :update]
+  before_action :get_user, only: [:show, :edit, :update, :inbox]
+  before_action :current_user_or_admin_only, only: [:edit, :update, :inbox]
 
   def new
     @user = User.new
@@ -33,6 +34,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def inbox
+    @messages = @user.received_messages.includes(:sender)
+  end
+
   private
 
   def user_params
@@ -41,5 +46,11 @@ class UsersController < ApplicationController
 
   def get_user
     @user ||= User.find(params[:id])
+  end
+
+  def current_user_or_admin_only
+    unless current_user == @user || current_user.admin?
+      redirect_to province_url(current_user.province)
+    end
   end
 end

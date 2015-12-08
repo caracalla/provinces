@@ -3,10 +3,10 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.text :body, null: false
       t.integer :money, default: 0
-      t.references :user, null: false, index: true, foreign_key: true
-
-      t.integer :messageable_id, null: false, index: true
-      t.string :messageable_type, null: false
+      t.references :sender, null: false, index: true, foreign_key: true
+      t.references :messageable, null: false, polymorphic: true, index: true
+      t.integer :parent_messsage_id, index: true, foreign_key: true
+      t.boolean :read, null: false, default: false
 
       t.timestamps null: false
     end
