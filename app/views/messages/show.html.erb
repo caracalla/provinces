@@ -1,0 +1,19 @@
+<%= render "card", message: @message %>
+
+<div class="row"%>
+  <div class="col-md-11 col-md-offset-1">
+    <% @child_messages.each do |child_message| %>
+      <%= render "card", message: child_message %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h4 class="text-center">Reply to <%= @message.sender.username %></h4>
+
+    <%= render "messages/form", message: @new_reply, recipient: @message.sender, parent_message_id: @message.id %>
+  </div>
+</div>

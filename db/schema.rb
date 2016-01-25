@@ -17,20 +17,19 @@ ActiveRecord::Schema.define(version: 20151203013810) do
   enable_extension "plpgsql"
 
   create_table "messages", force: :cascade do |t|
-    t.text     "body",                               null: false
-    t.integer  "money",              default: 0
-    t.integer  "sender_id",                          null: false
-    t.integer  "messageable_id",                     null: false
-    t.string   "messageable_type",                   null: false
-    t.integer  "parent_messsage_id"
-    t.boolean  "read",               default: false, null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.text     "body",                              null: false
+    t.integer  "money",             default: 0
+    t.integer  "sender_id",                         null: false
+    t.string   "messageable_type",                  null: false
+    t.integer  "messageable_id",                    null: false
+    t.integer  "parent_message_id"
+    t.boolean  "read",              default: false, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id", using: :btree
+    t.index ["parent_message_id"], name: "index_messages_on_parent_message_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
   end
-
-  add_index "messages", ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id", using: :btree
-  add_index "messages", ["parent_messsage_id"], name: "index_messages_on_parent_messsage_id", using: :btree
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
 
   create_table "nation_memberships", force: :cascade do |t|
     t.integer  "rank"
@@ -40,10 +39,9 @@ ActiveRecord::Schema.define(version: 20151203013810) do
     t.integer  "nation_id",                         null: false
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.index ["nation_id"], name: "index_nation_memberships_on_nation_id", using: :btree
+    t.index ["province_id"], name: "index_nation_memberships_on_province_id", using: :btree
   end
-
-  add_index "nation_memberships", ["nation_id"], name: "index_nation_memberships_on_nation_id", using: :btree
-  add_index "nation_memberships", ["province_id"], name: "index_nation_memberships_on_province_id", using: :btree
 
   create_table "nations", force: :cascade do |t|
     t.string   "name",              null: false
@@ -76,9 +74,8 @@ ActiveRecord::Schema.define(version: 20151203013810) do
     t.string   "flag_content_type"
     t.integer  "flag_file_size"
     t.datetime "flag_updated_at"
+    t.index ["user_id"], name: "index_provinces_on_user_id", using: :btree
   end
-
-  add_index "provinces", ["user_id"], name: "index_provinces_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",                            null: false
@@ -92,9 +89,8 @@ ActiveRecord::Schema.define(version: 20151203013810) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.index ["session_token"], name: "index_users_on_session_token", using: :btree
+    t.index ["username"], name: "index_users_on_username", using: :btree
   end
-
-  add_index "users", ["session_token"], name: "index_users_on_session_token", using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

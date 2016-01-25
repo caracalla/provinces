@@ -68,6 +68,7 @@
           </button>
 
           <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to "Messages", inbox_user_url(current_user), class: "dropdown-item" %>
             <%= link_to "Edit Profile", edit_user_url(current_user), class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
             <%= button_to "Sign Out", session_url, method: :delete, class: "dropdown-item" %>

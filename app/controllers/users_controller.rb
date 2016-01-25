@@ -35,7 +35,13 @@ class UsersController < ApplicationController
   end
 
   def inbox
-    @messages = @user.received_messages.includes(:sender)
+    @parent_messages = @user.received_messages.includes(:parent_message).map do |message|
+      message.parent_message_id.nil? ? message : message.parent_message
+    end.uniq
+
+    ids = "(#{@parent_messages.map(&:id).join(",")})"
+
+    #@child_messages = Message.find_by_sql("SELECT * FROM messages m1 JOIN messages m2 ON m1.id = m2.parent_message_id WHERE m1.id IN #{ids}")
   end
 
   private

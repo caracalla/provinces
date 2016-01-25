@@ -1,0 +1,12 @@
+<%= form_for message do |form| %>
+  <%= form.hidden_field :messageable_type, value: recipient.class %>
+  <%= form.hidden_field :messageable_id, value: recipient.id %>
+  <%= form.hidden_field :sender_id, value: current_user.id %>
+  <%= form.hidden_field :parent_message_id, value: parent_message_id %>
+
+  <div class="form-group">
+    <%= form.text_area :body, class: "form-control" %>
+  </div>
+
+  <%= form.submit "Send", class: "btn btn-primary" %>
+<% end %>

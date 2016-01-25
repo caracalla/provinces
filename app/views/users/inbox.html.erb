@@ -6,8 +6,24 @@
   <div class="col-md-10">
     <h1>Messages</h1>
 
-    <% @messages.each do |message| %>
-      <%= render "messages/card", message: message %>
+    <hr>
+
+    <% if @parent_messages.empty? %>
+      <p class="lead text-muted">No messages</p>
+    <% else %>
+      <% @parent_messages.each do |message| %>
+        <%= render "messages/card", message: message %>
+
+        <div class="row"%>
+          <% message.child_messages.each do |child_message| %>
+            <div class="col-md-11 col-md-offset-1">
+              <%= render "messages/card", message: child_message %>
+            </div>
+          <% end %>
+        </div>
+
+        <br>
+      <% end %>
     <% end %>
   </div>
 </div>

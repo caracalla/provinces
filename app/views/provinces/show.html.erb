@@ -8,7 +8,6 @@
     <div class="row">
       <div class="col-md-6">
         <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
-        <p class="small text-muted text-center">map placeholder</p>
       </div>
 
       <div class="col-md-6">
@@ -25,22 +24,14 @@
 
     <hr>
 
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h3 class="text-center">Send a message to <%= @user.username %></h3>
+    <% if current_user != @user %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h4 class="text-center">Send a message to <%= @user.username %></h4>
 
-        <%= form_for @message do |form| %>
-          <%= form.hidden_field :messageable_type, value: User %>
-          <%= form.hidden_field :messageable_id, value: @user.id %>
-          <%= form.hidden_field :sender_id, value: current_user.id %>
-
-          <div class="form-group">
-            <%= form.text_area :body, class: "form-control" %>
-          </div>
-
-          <%= form.submit "Send", class: "btn btn-primary" %>
-        <% end %>
+          <%= render "messages/form", message: @message, recipient: @user, parent_message_id: nil %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

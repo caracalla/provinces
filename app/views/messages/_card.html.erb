@@ -1,9 +1,67 @@
-<div class="card">
-  <div class="card-block">
-    <p class="card-text">Sender: <%= message.sender.username %></p>
-  </div>
+<div class="card-group">
+  <% if message.parent_message_id.nil? %>
+    <div class="card" style="width: 8rem;">
+      <%= image_tag message.sender.avatar.url(:medium), class: "img-fluid card-img" %>
+    </div>
 
-  <div class="card-block">
-    <p class="card-text"><%= message.body %></p>
-  </div>
+    <div class="card">
+      <div class="card-block">
+        <p class="card-text">
+          <%= link_to message.sender.username, province_url(message.sender.province), class: "lead" %> -
+          <%= replace_newlines(message.body) %>
+        </p>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <p class="card-text">
+              <small class="text-muted">Sent: <%= message.created_at %></small>
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <% if message.parent_message_id.nil? %>
+              <p class="card-text pull-xs-right">
+                <small>
+                  <%= link_to "Reply", message_url(message) %> | <%= link_to "Mark as read", '#' %>
+                </small>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="card" style="width: 4rem;">
+      <%= image_tag message.sender.avatar.url(:medium), class: "img-fluid card-img" %>
+    </div>
+
+    <div class="card">
+      <div class="card-block">
+        <p class="card-text">
+          <%= link_to message.sender.username, province_url(message.sender.province) %> -
+          <%= replace_newlines(message.body) %>
+        </p>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <p class="card-text">
+              <small class="text-muted">Sent: <%= message.created_at %></small>
+            </p>
+          </div>
+
+          <div class="col-md-6">
+            <% if message.parent_message_id.nil? %>
+              <p class="card-text pull-xs-right">
+                <small>
+                  <%= link_to "Reply", message_url(message) %> | <%= link_to "Mark as read", '#' %>
+                </small>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>

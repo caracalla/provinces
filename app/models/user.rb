@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_one :province, dependent: :destroy
   has_one :nation_membership, through: :province
   has_one :nation, through: :nation_membership # :whoa:
-  has_many :sent_messages, class: Message, foreign_key: "sender_id"
-  has_many :received_messages, class: Message, as: :messageable
+  has_many :sent_messages, class_name: Message, foreign_key: "sender_id"
+  has_many :received_messages, class_name: Message, as: :messageable
 
   # Paperclip, for avatars
   has_attached_file :avatar, styles: { medium: "300x300#" }, default_url: "/images/:style/missing.png"
