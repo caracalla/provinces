@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     end
 
     if params[:message][:messageable_type] == "Nation"
-      redirect_to nation_url(params[:message][:messageable_id])
+      redirect_to messageboard_nation_url(params[:message][:messageable_id])
     else
       if params[:message][:parent_message_id].blank?
         redirect_to province_url(User.find(params[:message][:messageable_id]).province)

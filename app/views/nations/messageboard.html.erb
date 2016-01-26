@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-2">
+    <%= render "card", nation: @nation %>
+  </div>
+
+  <div class="col-md-10">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to "Nation Info", nation_url(@nation), class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Messageboard", messageboard_nation_url(@nation), class: "nav-link active" %>
+      </li>
+    </ul>
+
+    <br>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h4 class="text-xs-center">Send a message to <%= @nation.name %></h4>
+        <%= render "messages/form", message: @new_message, recipient: @nation, parent_message_id: nil %>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <% @messages.each do |message| %>
+        <%= render "messages/card", message: message %>
+      <% end %>
+    </div>
+  </div>
+</div>

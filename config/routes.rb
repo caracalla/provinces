@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :nations do
     get "members", on: :member
+    get "messageboard", on: :member
   end
 
   resources :nation_memberships, only: [:create, :update, :destroy] do

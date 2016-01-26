@@ -4,10 +4,18 @@
   </div>
 
   <div class="col-md-10">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <%= link_to "Nation Info", nation_url(@nation), class: "nav-link active" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Messageboard", messageboard_nation_url(@nation), class: "nav-link" %>
+      </li>
+    </ul>
+
     <div class="row">
       <div class="col-md-6">
         <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
-        <p class="small text-muted text-center">map placeholder</p>
       </div>
 
       <div class="col-md-6">

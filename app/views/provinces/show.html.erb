@@ -23,15 +23,15 @@
     </div>
 
     <hr>
-
-    <% if current_user != @user %>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h4 class="text-center">Send a message to <%= @user.username %></h4>
-
-          <%= render "messages/form", message: @message, recipient: @user, parent_message_id: nil %>
-        </div>
-      </div>
-    <% end %>
   </div>
+
+  <% if current_user != @user %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h4 class="text-center">Send a message to <%= @user.username %></h4>
+
+        <%= render "messages/form", message: @message, recipient: @user, parent_message_id: nil %>
+      </div>
+    </div>
+  <% end %>
 </div>
