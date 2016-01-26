@@ -8,7 +8,6 @@
     <div class="row">
       <div class="col-md-6">
         <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/8/85/Cyclohexane_simple.svg", class: "img-fluid" %>
-        <p class="small text-muted text-center">map placeholder</p>
       </div>
 
       <div class="col-md-6">
@@ -22,5 +21,17 @@
         <p>Description: <%= @province.description %></p>
       </div>
     </div>
+
+    <hr>
   </div>
+
+  <% if current_user != @user %>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h4 class="text-center">Send a message to <%= @user.username %></h4>
+
+        <%= render "messages/form", message: @message, recipient: @user, parent_message_id: nil %>
+      </div>
+    </div>
+  <% end %>
 </div>

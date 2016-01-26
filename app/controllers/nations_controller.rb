@@ -1,6 +1,6 @@
 class NationsController < ApplicationController
   before_action :redirect_signed_out_user, except: [:show, :index]
-  before_action :get_nation, only: [:show, :edit, :update, :destroy, :members]
+  before_action :get_nation, except: [:new, :create]
   before_action :redirect_user_with_nation, only: [:new, :create]
   before_action :redirect_user_without_province, except: [:show, :index]
   before_action :only_nation_admin, only: [:edit, :update]
@@ -51,6 +51,11 @@ class NationsController < ApplicationController
   def members
     @members = NationMembership.where(nation_id: @nation.id).where(state: "active")
     @pending_members = NationMembership.where(nation_id: @nation.id).where(state: "pending")
+  end
+
+  def messageboard
+    @messages = @nation.received_messages
+    @new_message = Message.new
   end
 
   private

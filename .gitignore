@@ -15,3 +15,6 @@
 /public/system
 # Ignore application configuration
 /config/application.yml
+
+# Ignore rbenv
+/.ruby-version

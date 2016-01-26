@@ -1,6 +1,6 @@
 # Provinces
 
-Link coming soon!
+http://provinc.es
 
 ## Minimum Viable Product
 

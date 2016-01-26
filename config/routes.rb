@@ -2,16 +2,23 @@ Rails.application.routes.draw do
   root to: "static_pages#home"
 
   resource :session, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :edit, :update]
+
+  resources :users, only: [:new, :create, :edit, :update] do
+    get "inbox", on: :member
+  end
+
   resources :provinces, except: :index
 
   resources :nations do
     get "members", on: :member
+    get "messageboard", on: :member
   end
 
   resources :nation_memberships, only: [:create, :update, :destroy] do
     post "approve", on: :member
   end
+
+  resources :messages, only: [:create, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

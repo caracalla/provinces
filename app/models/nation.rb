@@ -3,6 +3,7 @@ class Nation < ActiveRecord::Base
 
   has_many :nation_memberships, -> { where state: "active" }, dependent: :destroy
   has_many :provinces, through: :nation_memberships
+  has_many :received_messages, class_name: Message, as: :messageable
 
   has_attached_file :flag, styles: { medium: "300x300>" }, default_url: "/images/:style/default_flag.svg"
   validates_attachment_content_type :flag, content_type: /\Aimage\/.*\Z/
